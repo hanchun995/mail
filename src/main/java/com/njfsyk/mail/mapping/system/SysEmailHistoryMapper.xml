@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.njfsyk.mail.dao.system.SysEmailHistoryMapper" >
+  <resultMap id="BaseResultMap" type="com.njfsyk.mail.model.system.SysEmailHistory" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="receive_id" property="receiveId" jdbcType="INTEGER" />
+    <result column="receive_email" property="receiveEmail" jdbcType="VARCHAR" />
+    <result column="apply_id" property="applyId" jdbcType="INTEGER" />
+    <result column="apply_reason" property="applyReason" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="DATE" />
+    <result column="send_time" property="sendTime" jdbcType="DATE" />
+    <result column="subject" property="subject" jdbcType="VARCHAR" />
+    <result column="receive_name" property="receiveName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, receive_id, receive_email, apply_id, apply_reason, create_time, send_time,subject,receive_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_email_history
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_email_history
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.njfsyk.mail.model.system.SysEmailHistory" >
+    insert into sys_email_history (id, receive_id, receive_email, 
+      apply_id, apply_reason, create_time, 
+      send_time)
+    values (#{id,jdbcType=INTEGER}, #{receiveId,jdbcType=INTEGER}, #{receiveEmail,jdbcType=VARCHAR}, 
+      #{applyId,jdbcType=INTEGER}, #{applyReason,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, 
+      #{sendTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.njfsyk.mail.model.system.SysEmailHistory" >
+    insert into sys_email_history
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="receiveId != null" >
+        receive_id,
+      </if>
+      <if test="receiveEmail != null" >
+        receive_email,
+      </if>
+      <if test="applyId != null" >
+        apply_id,
+      </if>
+      <if test="applyReason != null" >
+        apply_reason,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="sendTime != null" >
+        send_time,
+      </if>
+      <if test="subject != null" >
+        subject,
+      </if>
+      <if test="receiveName != null" >
+        receive_name,
+      </if>
+      <if test="fileUrl1 != null" >
+        file_url1,
+      </if>
+      <if test="fileUrl2 != null" >
+        file_url2,
+      </if>
+      <if test="fileUrl3 != null" >
+        file_url3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="receiveId != null" >
+        #{receiveId,jdbcType=INTEGER},
+      </if>
+      <if test="receiveEmail != null" >
+        #{receiveEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="applyId != null" >
+        #{applyId,jdbcType=INTEGER},
+      </if>
+      <if test="applyReason != null" >
+        #{applyReason,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="sendTime != null" >
+        #{sendTime,jdbcType=DATE},
+      </if>
+       <if test="subject != null" >
+        #{subject,jdbcType=VARCHAR},
+      </if>
+       <if test="receiveName != null" >
+        #{receiveName,jdbcType=VARCHAR},
+      </if>
+       <if test="fileUrl1 != null" >
+        #{fileUrl1},
+      </if>
+      <if test="fileUrl2 != null" >
+        #{fileUrl2},
+      </if>
+      <if test="fileUrl3 != null" >
+        #{fileUrl3},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.njfsyk.mail.model.system.SysEmailHistory" >
+    update sys_email_history
+    <set >
+      <if test="receiveId != null" >
+        receive_id = #{receiveId,jdbcType=INTEGER},
+      </if>
+      <if test="receiveEmail != null" >
+        receive_email = #{receiveEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="applyId != null" >
+        apply_id = #{applyId,jdbcType=INTEGER},
+      </if>
+      <if test="applyReason != null" >
+        apply_reason = #{applyReason,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="sendTime != null" >
+        send_time = #{sendTime,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.njfsyk.mail.model.system.SysEmailHistory" >
+    update sys_email_history
+    set receive_id = #{receiveId,jdbcType=INTEGER},
+      receive_email = #{receiveEmail,jdbcType=VARCHAR},
+      apply_id = #{applyId,jdbcType=INTEGER},
+      apply_reason = #{applyReason,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=DATE},
+      send_time = #{sendTime,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

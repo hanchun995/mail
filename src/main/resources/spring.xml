@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="
+http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-4.1.xsd"
+default-lazy-init="true"
+>
+
+	<!-- 引入属性文件 -->
+	<context:property-placeholder location="classpath:jdbc.properties" />
+
+	<!-- 自动扫描(自动注入) -->
+
+	<context:component-scan base-package="com.njfsyk.mail.service" />
+ 
+ 
+		<bean id="SpringQtzJob" class="com.njfsyk.mail.quartz.SpringQtz" />
+	<bean id="SpringQtzJobMethod"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="SpringQtzJob" />
+		</property>
+		<property name="targetMethod">
+			<value>execute</value>
+		</property>
+	   <property name="concurrent" value="false" />  <!-- 是否允许任务并发执行。当值为false时，表示必须等到前一个线程处理完毕后才再启一个新的线程 -->
+
+	</bean>
+
+	<bean id="cronTriggerFactoryBean" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="SpringQtzJobMethod"></property>
+		<property name="cronExpression" value="0/30 * * * * ?"></property>
+	</bean> 
+
+	<bean id="SpringJobSchedulerFactoryBean"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="cronTriggerFactoryBean" />
+			</list>
+		</property>
+		 <property name="autoStartup" value="true"/>  
+	</bean>
+	
+	 
+ 
+</beans>

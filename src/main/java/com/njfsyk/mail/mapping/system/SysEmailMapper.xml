@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.njfsyk.mail.dao.system.SysEmailMapper" >
+  <resultMap id="BaseResultMap" type="com.njfsyk.mail.model.system.SysEmail" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="receive_id" property="receiveId" jdbcType="INTEGER" />
+    <result column="receive_email" property="receiveEmail" jdbcType="VARCHAR" />
+    <result column="apply_id" property="applyId" jdbcType="INTEGER" />
+    <result column="apply_reason" property="applyReason" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="DATE" />
+    <result column="is_send" property="isSend" jdbcType="SMALLINT" />
+    <result column="subject" property="subject" jdbcType="VARCHAR" />
+    <result column="receive_name" property="receiveName" jdbcType="VARCHAR" />
+    <result column="file_url1" property="fileUrl1" jdbcType="VARCHAR" />
+    <result column="file_url2" property="fileUrl2" jdbcType="VARCHAR" />
+    <result column="file_url3" property="fileUrl3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, receive_id, receive_email, apply_id, apply_reason, create_time, is_send,subject,receive_name,file_url1,file_url2,file_url3
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_email
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_email
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.njfsyk.mail.model.system.SysEmail" >
+    insert into sys_email (id, receive_id, receive_email, 
+      apply_id, apply_reason, create_time, 
+      is_send,subject,receive_name,file_url1,file_url2,file_url3)
+    values (nextval('seq_email'), #{receiveId,jdbcType=INTEGER}, #{receiveEmail,jdbcType=VARCHAR}, 
+      #{applyId,jdbcType=INTEGER}, #{applyReason,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, 
+      #{isSend,jdbcType=SMALLINT},#{subject,jdbcType=VARCHAR},#{receiveName,jdbcType=VARCHAR},#{fileUrl1},#{fileUrl2},#{fileUrl3})
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.njfsyk.mail.model.system.SysEmail" >
+    update sys_email
+    <set >
+      <if test="receiveId != null" >
+        receive_id = #{receiveId,jdbcType=INTEGER},
+      </if>
+      <if test="receiveEmail != null" >
+        receive_email = #{receiveEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="applyId != null" >
+        apply_id = #{applyId,jdbcType=INTEGER},
+      </if>
+      <if test="applyReason != null" >
+        apply_reason = #{applyReason,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="isSend != null" >
+        is_send = #{isSend,jdbcType=SMALLINT},
+      </if>
+      <if test="subject != null" >
+        subject = #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveName != null" >
+        receive_name = #{receiveName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="queryAllSysEmail" resultMap="BaseResultMap">
+  	select * from sys_email
+  </select>
+</mapper>
