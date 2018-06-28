@@ -6,9 +6,9 @@ public interface Consts
 
 	public static interface SendEmail
 	{
-		String FSYKEMAIL = "sales@njfsyk.com";// 发�?邮件�?
-		String FSYKPWD = "Fsyk404"; // 密码
-		String FSYKSMTP = "smtp.exmail.qq.com"; // fsyk �?SMTP 服务器地�?
+		String FSYKEMAIL = ;// 发�?邮件�?
+		String FSYKPWD = ; // 密码
+		String FSYKSMTP = ; // fsyk �?SMTP 服务器地�?
 	}
 
 	public static interface IsSend
